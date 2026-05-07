@@ -12,7 +12,7 @@ const Hero = ({ onNewOrder }: { onNewOrder?: () => void }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
         <img 
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcaQcXtKS6_UNe64frO6wChSfBFvElbfga5BZPkxrZdBzCzWfb1WbKaFfjwp3Tc8xthlRsitsRsHDNPJgqdHWeyzfyavfMOHX08qYOGlhYngQjCqNEXdOQjeIPltUN-92fnLOFz-BpMnHNUDVihSSy1vxWW0C40pR_Qew6E8KfA1gVlx-TKpIDTuM1Gj6NNgx3e1gBfTWxy5M4b-IZUPRi5mH6sU3khZwjwVp0FbDOeUZIH8mSx8Ar1lKnpe7QJhzwEyX9E9uS6puU"
-          alt="Aurelle Couture Hero" 
+          alt="CC Craftings Hero" 
           className="w-full h-full object-cover opacity-60"
         />
       </div>
@@ -173,7 +173,7 @@ const Journey = ({ status }: { status: any }) => {
     <section className="py-24 bg-surface-container-lowest overflow-hidden">
       <div className="max-w-7xl mx-auto px-8">
         <SectionHeading subtitle="Your dream outfit, from concept to creation.">
-          The Aurelle <span className="text-primary">Journey</span>
+          The CC <span className="text-primary">Journey</span>
         </SectionHeading>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">

@@ -56,7 +56,7 @@ export default function ConsultationPage() {
           </div>
           <h2 className="font-headline font-bold text-3xl mb-4 text-on-surface">Request Received!</h2>
           <p className="text-on-surface-variant mb-10 leading-relaxed text-sm">
-            Thank you for choosing Aurelle Couture. Our lead designer will review your details and reach out via email within 24 hours to confirm your private consultation session.
+            Thank you for choosing CC Craftings. Our lead designer will review your details and reach out via email within 24 hours to confirm your private consultation session.
           </p>
           <Button variant="secondary" className="w-full" onClick={() => navigate('/')}>Return Home</Button>
         </motion.div>
@@ -195,7 +195,7 @@ export default function ConsultationPage() {
               </Button>
               
               <p className="text-center text-on-surface-variant text-[10px] uppercase tracking-[0.2em] opacity-50">
-                Secured by Aurelle Identity Systems
+                Secured by CC Identity Systems
               </p>
             </form>
           </div>

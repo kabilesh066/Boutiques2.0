@@ -29,12 +29,16 @@ export const Navbar = ({ onNewOrder, onHomeClick }: { onNewOrder?: () => void, o
           className="font-headline font-bold text-2xl tracking-tighter text-primary neon-text-primary"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
-              <Sparkles className="text-primary" size={20} />
+            <div className="relative w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center border border-primary/20 overflow-hidden group">
+              <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              <div className="relative flex items-center justify-center -space-x-2">
+                <span className="font-headline font-black text-2xl text-primary leading-none">C</span>
+                <span className="font-headline font-black text-2xl text-white/90 leading-none">C</span>
+              </div>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-headline font-black text-xl tracking-tighter text-white">AURELLE</span>
-              <span className="font-label text-[10px] uppercase tracking-[0.3em] text-primary/80 font-black">Couture</span>
+              <span className="font-headline font-black text-xl tracking-tighter text-white">CC</span>
+              <span className="font-label text-[10px] uppercase tracking-[0.3em] text-primary/80 font-black">Craftings</span>
             </div>
           </div>
         </Link>
@@ -88,13 +92,16 @@ export const Navbar = ({ onNewOrder, onHomeClick }: { onNewOrder?: () => void, o
             className="fixed inset-0 bg-surface z-50 p-8 flex flex-col"
           >
             <div className="flex justify-between items-center mb-12">
-              <div className="font-headline font-bold text-xl text-primary">AURELLE</div>
+              <div className="font-headline font-bold text-xl text-primary flex items-center gap-2">
+                <span className="bg-primary/20 px-2 py-0.5 rounded leading-none">CC</span>
+                <span>CRAFTINGS</span>
+              </div>
               <X className="w-8 h-8 cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
             </div>
             <div className="flex flex-col gap-8">
               <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-3xl font-headline font-bold hover:text-primary transition-colors">Home</Link>
               <Link to="/design" onClick={() => setMobileMenuOpen(false)} className="text-3xl font-headline font-bold hover:text-primary transition-colors">Bespoke Design</Link>
-              <a href="#collections" onClick={() => setMobileMenuOpen(false)} className="text-3xl font-headline font-bold hover:text-primary transition-colors">Collections</a>
+              <Link to="/collections" onClick={() => setMobileMenuOpen(false)} className="text-3xl font-headline font-bold hover:text-primary transition-colors">Collections</Link>
               <Link to="/consultation" onClick={() => setMobileMenuOpen(false)}>
                 <Button className="mt-8 w-full">Book Appointment</Button>
               </Link>

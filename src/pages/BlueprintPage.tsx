@@ -94,7 +94,7 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
       >
         {/* Background Watermark/Decor */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
-          <h2 className="text-[15rem] font-headline font-black rotate-12">AURELLE</h2>
+          <h2 className="text-[15rem] font-headline font-black rotate-12">CC</h2>
         </div>
 
         {/* Master Copy Label */}
@@ -131,7 +131,7 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
               <h3 className="font-label text-[12px] uppercase tracking-widest font-black">Atelier Ethics</h3>
             </div>
             <p className="text-on-surface-variant text-[11px] leading-relaxed uppercase tracking-wider font-medium">
-              This technical specification is proprietary to Aurelle Atelier. All designs are handcrafted per these digital metrics. Re-evaluation occurs during the first fitting session.
+              This technical specification is proprietary to CC Atelier. All designs are handcrafted per these digital metrics. Re-evaluation occurs during the first fitting session.
             </p>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
         {/* Footer Signature Area */}
         <div className="pt-16 border-t-2 border-dashed border-outline-variant mt-32 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left relative z-10">
           <div>
-            <div className="font-headline italic text-2xl mb-2 logo-glow">Aurelle Atelier</div>
+            <div className="font-headline italic text-2xl mb-2 logo-glow">CC Atelier</div>
             <div className="text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-black">Official Couture Certification</div>
           </div>
           <div className="w-48 h-[1px] bg-outline-variant hidden md:block"></div>
@@ -199,7 +199,7 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
 
         {/* Print only footer */}
         <div className="hidden print:block mt-12 text-center text-[8px] text-gray-400 uppercase tracking-widest">
-          © 2024 Aurelle Couture. Digitally Generated at Aurelle AI Atelier.
+          © 2024 CC Craftings. Digitally Generated at CC Atelier.
         </div>
       </motion.div>
     </div>

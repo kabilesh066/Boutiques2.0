@@ -22,7 +22,7 @@ export default function CollectionsPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const saved = localStorage.getItem('aurelle_collections');
+    const saved = localStorage.getItem('cccraftings_collections');
     if (saved) {
       setCollections(JSON.parse(saved));
     }
@@ -31,14 +31,14 @@ export default function CollectionsPage() {
   const deleteOrder = (id: string) => {
     const updated = collections.filter(item => item.id !== id);
     setCollections(updated);
-    localStorage.setItem('aurelle_collections', JSON.stringify(updated));
+    localStorage.setItem('cccraftings_collections', JSON.stringify(updated));
   };
 
   const editOrder = (order: any) => {
     // Load this order into current design state and journey status
-    localStorage.setItem('aurelle_design_state', JSON.stringify(order.state));
+    localStorage.setItem('cccraftings_design_state', JSON.stringify(order.state));
     // Re-verify journey status (simplified for this demo, usually you'd re-verify logic)
-    localStorage.setItem('aurelle_journey_status', JSON.stringify({
+    localStorage.setItem('cccraftings_journey_status', JSON.stringify({
       vision: true,
       measurements: true,
       craft: true,

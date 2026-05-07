@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -19,20 +19,21 @@ function ScrollToTop() {
   return null;
 }
 
-export default function App() {
+function AppContent() {
+  const navigate = useNavigate();
   const [journeyStatus, setJourneyStatus] = useState(() => {
-    const saved = localStorage.getItem('aurelle_journey_status');
+    const saved = localStorage.getItem('cccraftings_journey_status');
     return saved ? JSON.parse(saved) : {
       vision: false,
       measurements: false,
       craft: false,
       delivery: false,
-      started: false // Added to track if user ever entered data
+      started: false
     };
   });
 
   useEffect(() => {
-    localStorage.setItem('aurelle_journey_status', JSON.stringify(journeyStatus));
+    localStorage.setItem('cccraftings_journey_status', JSON.stringify(journeyStatus));
   }, [journeyStatus]);
 
   const updateStatus = (key: string, status: boolean) => {
@@ -43,8 +44,8 @@ export default function App() {
   };
 
   const startNewOrder = () => {
-    localStorage.removeItem('aurelle_design_state');
-    localStorage.removeItem('aurelle_journey_status');
+    localStorage.removeItem('cccraftings_design_state');
+    localStorage.removeItem('cccraftings_journey_status');
     setJourneyStatus({
       vision: false,
       measurements: false,
@@ -52,12 +53,12 @@ export default function App() {
       delivery: false,
       started: false
     });
-    window.location.href = '/design';
+    navigate('/design');
   };
 
   const returnHome = () => {
-    localStorage.removeItem('aurelle_design_state');
-    localStorage.removeItem('aurelle_journey_status');
+    localStorage.removeItem('cccraftings_design_state');
+    localStorage.removeItem('cccraftings_journey_status');
     setJourneyStatus({
       vision: false,
       measurements: false,
@@ -65,24 +66,30 @@ export default function App() {
       delivery: false,
       started: false
     });
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (
+    <div className="min-h-screen bg-background scanline">
+      <Navbar onNewOrder={() => navigate('/collections')} onHomeClick={returnHome} />
+      <Routes>
+        <Route path="/" element={<HomePage journeyStatus={journeyStatus} onNewOrder={startNewOrder} />} />
+        <Route path="/consultation" element={<ConsultationPage onHomeClick={returnHome} />} />
+        <Route path="/design" element={<DesignPage onStatusUpdate={updateStatus} journeyStatus={journeyStatus} />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/blueprint" element={<BlueprintPage onNewOrder={() => navigate('/collections')} />} />
+        <Route path="/collections" element={<CollectionsPage />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-background scanline">
-        <Navbar onNewOrder={() => window.location.href = '/collections'} onHomeClick={returnHome} />
-        <Routes>
-          <Route path="/" element={<HomePage journeyStatus={journeyStatus} onNewOrder={startNewOrder} />} />
-          <Route path="/consultation" element={<ConsultationPage onHomeClick={returnHome} />} />
-          <Route path="/design" element={<DesignPage onStatusUpdate={updateStatus} journeyStatus={journeyStatus} />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/blueprint" element={<BlueprintPage onNewOrder={() => window.location.href = '/collections'} />} />
-          <Route path="/collections" element={<CollectionsPage />} />
-        </Routes>
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
   );
 }

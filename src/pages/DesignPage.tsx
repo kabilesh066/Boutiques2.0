@@ -55,7 +55,7 @@ const RadioCard = ({ label, value, active, onClick, icon: Icon, trend }: any) =>
     </div>
     <div className="space-y-1">
       <span className={`font-headline font-bold text-sm leading-tight block ${active ? 'text-white' : 'text-on-surface'}`}>{label}</span>
-      <span className={`font-label text-[8px] uppercase tracking-widest font-black block transition-opacity ${active ? 'text-white/60' : 'text-on-surface-variant/40'}`}>Aurelle Concept</span>
+      <span className={`font-label text-[8px] uppercase tracking-widest font-black block transition-opacity ${active ? 'text-white/60' : 'text-on-surface-variant/40'}`}>CC Concept</span>
     </div>
   </button>
 );
@@ -316,7 +316,7 @@ const RealisticPreview = ({ outfitType, color, style, fabric }: any) => {
 
       {/* Decorative Atelier Overlays */}
       <div className="absolute top-8 left-8 border-l border-primary/40 pl-4">
-        <h5 className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-black mb-1">Aurelle Studio</h5>
+        <h5 className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-black mb-1">CC Studio</h5>
         <p className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant font-bold">Concept No. 842-A</p>
       </div>
 
@@ -359,7 +359,7 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [designState, setDesignState] = useState(() => {
-    const saved = localStorage.getItem('aurelle_design_state');
+    const saved = localStorage.getItem('cccraftings_design_state');
     return saved ? JSON.parse(saved) : {
       outfitType: 'Gown',
       style: 'Elegant Minimal',
@@ -386,7 +386,7 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
 
   // Check and update status in real-time and persist data
   useEffect(() => {
-    localStorage.setItem('aurelle_design_state', JSON.stringify(designState));
+    localStorage.setItem('cccraftings_design_state', JSON.stringify(designState));
 
     // 1. Vision Status: Outfit Type + Style + (Optional Reference Links/Files)
     const hasVision = designState.outfitType !== '' && designState.style !== '' && (designState.referenceLinks !== '' || designState.inspirationFiles.length > 0);
@@ -429,14 +429,14 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
     else {
       setIsSubmitted(true);
       // Save to master collections
-      const collections = JSON.parse(localStorage.getItem('aurelle_collections') || '[]');
+      const collections = JSON.parse(localStorage.getItem('cccraftings_collections') || '[]');
       const newEntry = {
-        id: `AUR-${Math.floor(Math.random() * 90000) + 10000}`,
+        id: `CC-${Math.floor(Math.random() * 90000) + 10000}`,
         timestamp: new Date().toISOString(),
         state: designState,
         submitted: true
       };
-      localStorage.setItem('aurelle_collections', JSON.stringify([...collections, newEntry]));
+      localStorage.setItem('cccraftings_collections', JSON.stringify([...collections, newEntry]));
       
       onStatusUpdate('vision', true);
       onStatusUpdate('measurements', true);
@@ -475,7 +475,7 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
             Your custom outfit design has been sent to our atelier. Our designers will review the technical specifications and contact you to finalize the blueprint.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Button variant="primary" className="px-12" onClick={() => window.location.href = '/'}>Return Home</Button>
+            <Button variant="primary" className="px-12" onClick={() => navigate('/')}>Return Home</Button>
             <Button 
               variant="secondary" 
               className="px-12"

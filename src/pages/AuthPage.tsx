@@ -103,7 +103,7 @@ export default function AuthPage() {
                     onClick={() => setMode('signup')}
                     className="text-primary font-bold hover:underline"
                   >
-                    Join Aurelle
+                    Join CC Craftings
                   </button>
                 </p>
               </div>

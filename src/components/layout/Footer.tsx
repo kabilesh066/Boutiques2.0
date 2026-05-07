@@ -8,9 +8,15 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           <div className="md:col-span-5 space-y-6">
-            <div className="font-headline font-bold text-2xl text-primary uppercase tracking-tighter neon-text-primary">AURELLE COUTURE</div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative flex items-center justify-center -space-x-3">
+                <span className="font-headline font-black text-3xl text-primary leading-none">C</span>
+                <span className="font-headline font-black text-3xl text-white leading-none">C</span>
+              </div>
+              <div className="font-headline font-bold text-2xl text-white uppercase tracking-tighter">CRAFTINGS</div>
+            </div>
             <p className="font-body text-sm text-on-surface-variant leading-relaxed max-w-md">
-              Custom-crafted fashion designed to make every woman feel confident, elegant, and unforgettable. Handcrafted in our Neo-Tokyo inspired atelier, where heritage meets the future.
+              Meticulously crafted fashion designed for distinction. CC Craftings merges traditional artistry with modern precision in our digital-first atelier.
             </p>
             <div className="flex gap-4">
               <SocialIcon icon={<Instagram size={18} />} />
@@ -49,7 +55,7 @@ export const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">© 2026 AURELLE COUTURE. HANDCRAFTED IN NEO-TOKYO.</p>
+          <p className="font-label text-[10px] tracking-widest text-on-surface-variant uppercase">© 2026 CC CRAFTINGS. MASTERED IN THE DIGITAL ATELIER.</p>
           <div className="flex gap-8">
             <FooterLink className="text-[10px]">Privacy</FooterLink>
             <FooterLink className="text-[10px]">Boutiques</FooterLink>
