@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../components/shared/Button';
 import { SectionHeading } from '../components/shared/SectionHeading';
 
-const Hero = () => {
+const Hero = ({ onNewOrder }: { onNewOrder?: () => void }) => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center pt-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -45,9 +45,13 @@ const Hero = () => {
           <Link to="/consultation" className="w-full md:w-auto">
             <Button variant="primary" className="px-10 py-5 w-full">Book a Custom Consultation</Button>
           </Link>
-          <Link to="/design" className="w-full md:w-auto">
-            <Button variant="secondary" className="px-10 py-5 w-full">Design My Outfit</Button>
-          </Link>
+          <Button 
+            variant="secondary" 
+            className="px-10 py-5 w-full md:w-auto"
+            onClick={onNewOrder}
+          >
+            Design My Outfit
+          </Button>
         </motion.div>
 
         <motion.div 
@@ -199,7 +203,11 @@ const Journey = ({ status }: { status: any }) => {
                 <h3 className={`font-headline font-bold text-lg mb-2 ${isMissing ? 'text-primary' : 'text-on-surface'}`}>{step.title}</h3>
                 <p className="text-on-surface-variant text-sm px-4 leading-relaxed">{step.desc}</p>
                 {isMissing && (
-                  <Link to="/design" className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary font-bold hover:underline">
+                  <Link 
+                    to="/design" 
+                    state={{ step: i === 0 ? 4 : i + 1 }} // Step 1 -> index 4 (Vision), Step 2 -> index 2 (Meas), Step 3 -> index 3 (Craft)
+                    className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary font-bold hover:underline"
+                  >
                     Resolve Requirement
                   </Link>
                 )}
@@ -306,10 +314,10 @@ const FAQ = () => {
   );
 };
 
-export default function HomePage({ journeyStatus }: { journeyStatus: any }) {
+export default function HomePage({ journeyStatus, onNewOrder }: { journeyStatus: any, onNewOrder?: () => void }) {
   return (
     <>
-      <Hero />
+      <Hero onNewOrder={onNewOrder} />
       <Features />
       <Journey status={journeyStatus} />
       <Reviews />

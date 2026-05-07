@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-headline: "Sora", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-headline: "Outfit", sans-serif;
+  --font-body: "Sora", sans-serif;
   --font-label: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  --color-primary: #ff2d78;
-  --color-secondary: #00ffcc;
-  --color-tertiary: #ffe04a;
-  --color-background: #0a0a12;
+  --color-primary: #ff007b;
+  --color-secondary: #00f2fe;
+  --color-tertiary: #fffb00;
+  --color-background: #050508;
   --color-surface: #0f0f1a;
   --color-surface-container: #141422;
   --color-surface-container-low: #111118;

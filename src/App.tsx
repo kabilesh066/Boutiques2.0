@@ -7,6 +7,7 @@ import ConsultationPage from './pages/ConsultationPage';
 import DesignPage from './pages/DesignPage';
 import AuthPage from './pages/AuthPage';
 import BlueprintPage from './pages/BlueprintPage';
+import CollectionsPage from './pages/CollectionsPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -54,17 +55,31 @@ export default function App() {
     window.location.href = '/design';
   };
 
+  const returnHome = () => {
+    localStorage.removeItem('aurelle_design_state');
+    localStorage.removeItem('aurelle_journey_status');
+    setJourneyStatus({
+      vision: false,
+      measurements: false,
+      craft: false,
+      delivery: false,
+      started: false
+    });
+    window.location.href = '/';
+  };
+
   return (
     <Router>
       <ScrollToTop />
       <div className="min-h-screen bg-background scanline">
-        <Navbar />
+        <Navbar onNewOrder={() => window.location.href = '/collections'} onHomeClick={returnHome} />
         <Routes>
-          <Route path="/" element={<HomePage journeyStatus={journeyStatus} />} />
-          <Route path="/consultation" element={<ConsultationPage />} />
+          <Route path="/" element={<HomePage journeyStatus={journeyStatus} onNewOrder={startNewOrder} />} />
+          <Route path="/consultation" element={<ConsultationPage onHomeClick={returnHome} />} />
           <Route path="/design" element={<DesignPage onStatusUpdate={updateStatus} journeyStatus={journeyStatus} />} />
           <Route path="/auth" element={<AuthPage />} />
-          <Route path="/blueprint" element={<BlueprintPage onNewOrder={startNewOrder} />} />
+          <Route path="/blueprint" element={<BlueprintPage onNewOrder={() => window.location.href = '/collections'} />} />
+          <Route path="/collections" element={<CollectionsPage />} />
         </Routes>
         <Footer />
       </div>
