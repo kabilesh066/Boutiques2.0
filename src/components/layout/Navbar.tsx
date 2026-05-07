@@ -39,7 +39,7 @@ export const Navbar = ({ onNewOrder, onHomeClick }: { onNewOrder?: () => void, o
           </div>
         </Link>
 
-        <div className="hidden lg:block">
+        <div className="flex items-center">
           <Link 
             to="/" 
             onClick={(e) => {
@@ -48,10 +48,10 @@ export const Navbar = ({ onNewOrder, onHomeClick }: { onNewOrder?: () => void, o
                 onHomeClick();
               }
             }}
-            className="group relative px-8 py-2 overflow-hidden rounded-full"
+            className="group relative px-4 md:px-8 py-2 overflow-hidden rounded-full"
           >
             <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors" />
-            <span className="relative font-label uppercase tracking-[0.3em] text-[10px] font-black text-white hover:text-primary transition-colors">Home</span>
+            <span className="relative font-label uppercase tracking-[0.3em] text-[8px] md:text-[10px] font-black text-white hover:text-primary transition-colors">Home</span>
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-primary group-hover:w-1/2 transition-all duration-500" />
           </Link>
         </div>
