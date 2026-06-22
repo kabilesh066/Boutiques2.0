@@ -5,15 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../components/shared/Button';
 
 const Input = ({ label, icon: Icon, type = "text", ...props }: any) => (
-  <div className="space-y-2">
-    <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">{label}</label>
+  <div className="space-y-3">
+    <label className="font-label text-[10px] uppercase tracking-[0.3em] text-white/40 font-bold">{label}</label>
     <div className="relative group">
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors">
         <Icon size={16} />
       </div>
       <input 
         type={type}
-        className="w-full bg-surface-container-high/50 border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all pl-12 pr-4 py-4 text-on-surface outline-none rounded-xl"
+        className="w-full bg-surface-container-high/20 border border-white/5 focus:border-white focus:bg-white/5 transition-all pl-14 pr-6 py-5 text-on-surface outline-none"
         {...props}
       />
     </div>
@@ -42,8 +42,13 @@ export default function AuthPage() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-surface-container p-8 md:p-12 rounded-3xl border border-outline-variant/30 shadow-2xl relative z-10"
+        className="max-w-md w-full bg-surface p-12 md:p-16 border border-white/10 relative z-10"
       >
+        <div className="absolute top-0 right-0 p-8">
+          <div className="text-[10px] font-mono text-white/10 uppercase tracking-[0.5em] [writing-mode:vertical-lr] items-center gap-4 hidden md:flex">
+             Digital Atelier Access / {mode.toUpperCase()}
+          </div>
+        </div>
         <AnimatePresence mode="wait">
           {mode === 'login' && (
             <motion.div 
@@ -53,23 +58,24 @@ export default function AuthPage() {
               exit={{ opacity: 0, x: -20 }}
               className="space-y-8"
             >
-              <div className="text-center">
-                <h2 className="font-headline font-bold text-3xl mb-2">Welcome Back</h2>
-                <p className="text-on-surface-variant text-sm">Access your bespoke design atelier.</p>
+              <div className="text-left space-y-4">
+                <div className="h-1 w-12 bg-primary" />
+                <h2 className="font-headline font-black text-4xl uppercase tracking-tighter">Welcome <span className="text-white italic font-serif lowercase">Back</span></h2>
+                <p className="text-white/40 font-label text-[10px] uppercase tracking-[0.2em] font-bold">Secure Access to Boutique Dashboard</p>
               </div>
 
-              <div className="flex bg-surface-container-lowest p-1 rounded-xl border border-outline-variant">
+              <div className="flex bg-white/5 p-px border border-white/10">
                 <button 
                   onClick={() => setLoginMethod('email')}
-                  className={`flex-1 py-2 rounded-lg font-label text-[10px] uppercase tracking-widest transition-all ${loginMethod === 'email' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-on-surface-variant'}`}
+                  className={`flex-1 py-3 font-label text-[10px] uppercase tracking-widest transition-all ${loginMethod === 'email' ? 'bg-white text-black' : 'text-white/40 hover:text-white'}`}
                 >
-                  Email
+                  Email Spec
                 </button>
                 <button 
                   onClick={() => setLoginMethod('phone')}
-                  className={`flex-1 py-2 rounded-lg font-label text-[10px] uppercase tracking-widest transition-all ${loginMethod === 'phone' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-on-surface-variant'}`}
+                  className={`flex-1 py-3 font-label text-[10px] uppercase tracking-widest transition-all ${loginMethod === 'phone' ? 'bg-white text-black' : 'text-white/40 hover:text-white'}`}
                 >
-                  Mobile
+                  Mobile Unit
                 </button>
               </div>
 
@@ -118,9 +124,10 @@ export default function AuthPage() {
               exit={{ opacity: 0, x: -20 }}
               className="space-y-8"
             >
-              <div className="text-center">
-                <h2 className="font-headline font-bold text-3xl mb-2">Create Identity</h2>
-                <p className="text-on-surface-variant text-sm">Join our world of custom couture.</p>
+              <div className="text-left space-y-4">
+                <div className="h-1 w-12 bg-primary" />
+                <h2 className="font-headline font-black text-4xl uppercase tracking-tighter">Create <span className="text-white italic font-serif lowercase">Identity</span></h2>
+                <p className="text-white/40 font-label text-[10px] uppercase tracking-[0.2em] font-bold">Join the High-Fashion Digital Frontier</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">

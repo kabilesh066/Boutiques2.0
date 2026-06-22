@@ -17,21 +17,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../components/shared/Button';
 
 const TechLine = ({ label, value }: { label: string, value: string }) => (
-  <div className="flex justify-between border-b border-outline-variant/30 py-3 group">
-    <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold group-hover:text-primary transition-colors">{label}</span>
-    <span className="font-headline font-bold text-sm text-on-surface">{value || 'Not Specified'}</span>
+  <div className="flex justify-between border-b border-white/5 py-4 group">
+    <span className="font-label text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold group-hover:text-primary transition-colors">{label}</span>
+    <span className="font-headline font-bold text-sm text-white tracking-widest">{value || 'UNSPECIFIED'}</span>
   </div>
 );
 
 const MeasurementGrid = ({ measurements, units }: { measurements: any, units: string }) => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-white/10">
     {Object.entries(measurements).map(([key, value]) => (
-      <div key={key} className="bg-surface-container-high/50 p-4 rounded-xl border border-outline-variant/30 text-center">
-        <div className="font-label text-[9px] uppercase tracking-tighter text-on-surface-variant font-bold mb-1 opacity-60">
+      <div key={key} className="bg-surface/50 p-8 border border-white/5 text-left">
+        <div className="font-label text-[9px] uppercase tracking-[0.3em] text-white/20 font-black mb-4">
           {key.replace(/([A-Z])/g, ' $1')}
         </div>
-        <div className="font-headline font-bold text-xl text-primary">
-          {value || '--'}<span className="text-[10px] ml-1 opacity-50 uppercase">{units}</span>
+        <div className="font-headline font-black text-2xl text-white tracking-tighter">
+          {value || '00'}<span className="text-[10px] ml-2 opacity-50 uppercase font-mono">{units}</span>
         </div>
       </div>
     ))}
@@ -88,26 +88,26 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
       {/* The Printable Container */}
       <motion.div 
         ref={printRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-surface-container p-8 md:p-16 rounded-[40px] border border-outline-variant/30 shadow-2xl relative overflow-hidden print:p-0 print:border-none print:shadow-none print:bg-white"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="bg-surface p-12 md:p-20 border border-white/10 relative overflow-hidden print:p-0 print:border-none print:bg-white"
       >
-        {/* Background Watermark/Decor */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
-          <h2 className="text-[15rem] font-headline font-black rotate-12">CC</h2>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none select-none">
+          <h2 className="text-[20rem] font-headline font-black tracking-tighter">ATELIER</h2>
         </div>
 
-        {/* Master Copy Label */}
-        <div className="flex justify-between items-start mb-16 relative z-10">
-          <div className="space-y-1">
-            <div className="bg-secondary text-background font-label text-[10px] uppercase tracking-[0.3em] font-black px-4 py-1.5 rounded-full inline-block mb-4">
-              Master Blueprint Copy
+        <div className="flex justify-between items-start mb-24 relative z-10">
+          <div className="space-y-4">
+            <div className="bg-primary text-white font-label text-[10px] uppercase tracking-[0.5em] font-black px-6 py-2 inline-block">
+              Master Specification .24
             </div>
-            <div className="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold">Document ID: #AUR-{Math.floor(Math.random() * 90000) + 10000}</div>
-            <div className="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold">Issued: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+            <div className="space-y-1">
+              <div className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold">DOC_ID / #AUR-{Math.floor(Math.random() * 90000) + 10000}</div>
+              <div className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-bold">TIMESTAMP / {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()}</div>
+            </div>
           </div>
-          <div className="p-3 bg-white rounded-xl shadow-lg border border-outline-variant/10">
-             <QrCode size={48} className="text-background" />
+          <div className="p-4 bg-white border border-white/10">
+             <QrCode size={64} className="text-black" />
           </div>
         </div>
 
@@ -179,20 +179,19 @@ export default function BlueprintPage({ onNewOrder }: { onNewOrder?: () => void 
           </div>
         </div>
 
-        {/* Footer Signature Area */}
-        <div className="pt-16 border-t-2 border-dashed border-outline-variant mt-32 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left relative z-10">
-          <div>
-            <div className="font-headline italic text-2xl mb-2 logo-glow">CC Atelier</div>
-            <div className="text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-black">Official Couture Certification</div>
+        <div className="pt-24 border-t border-white/10 mt-32 flex flex-col md:flex-row justify-between items-end gap-12 relative z-10">
+          <div className="text-left">
+            <div className="font-serif italic text-4xl mb-4 text-white">CC Atelier</div>
+            <div className="text-[10px] uppercase tracking-[0.6em] text-white/20 font-black">Official Couture Certification</div>
           </div>
-          <div className="w-48 h-[1px] bg-outline-variant hidden md:block"></div>
-          <div className="space-y-4">
-            <div className="w-64 h-16 border-b-2 border-outline-variant relative">
-              <span className="absolute bottom-1 right-0 text-[8px] uppercase tracking-widest text-on-surface-variant font-bold">Designer Signature</span>
+          
+          <div className="space-y-8 flex flex-col items-end">
+            <div className="w-80 h-px bg-white/10 relative">
+               <div className="absolute -top-6 right-0 text-[9px] uppercase tracking-[0.3em] font-serif italic text-primary">Chief Designer Signature</div>
             </div>
-            <div className="flex items-center gap-2 justify-center md:justify-start">
-               <Calendar size={12} className="text-primary" />
-               <span className="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Validity: 60 Days from issue</span>
+            <div className="flex items-center gap-4">
+               <Calendar size={14} className="text-primary" />
+               <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">VALID_PERIOD / 60_DAYS</span>
             </div>
           </div>
         </div>

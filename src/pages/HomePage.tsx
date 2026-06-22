@@ -7,78 +7,100 @@ import { SectionHeading } from '../components/shared/SectionHeading';
 
 const Hero = ({ onNewOrder }: { onNewOrder?: () => void }) => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-24 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-8 overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background z-10"></div>
         <img 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcaQcXtKS6_UNe64frO6wChSfBFvElbfga5BZPkxrZdBzCzWfb1WbKaFfjwp3Tc8xthlRsitsRsHDNPJgqdHWeyzfyavfMOHX08qYOGlhYngQjCqNEXdOQjeIPltUN-92fnLOFz-BpMnHNUDVihSSy1vxWW0C40pR_Qew6E8KfA1gVlx-TKpIDTuM1Gj6NNgx3e1gBfTWxy5M4b-IZUPRi5mH6sU3khZwjwVp0FbDOeUZIH8mSx8Ar1lKnpe7QJhzwEyX9E9uS6puU"
-          alt="CC Craftings Hero" 
-          className="w-full h-full object-cover opacity-60"
+          src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80"
+          alt="Editorial Fashion" 
+          className="w-full h-full object-cover grayscale opacity-40 brightness-75 transition-all duration-1000 scale-105"
         />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,123,0.05),transparent_60%)]" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
-        <motion.h1 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="font-headline font-extrabold text-5xl md:text-8xl tracking-tight leading-none mb-6"
-        >
-          Designed Around <span className="text-primary neon-text-primary">You.</span><br />
-          Styled To Be <span className="text-secondary neon-text-secondary">Remembered.</span>
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-2xl mx-auto text-on-surface-variant text-lg md:text-xl mb-10 leading-relaxed"
-        >
-          From custom-designed dresses to statement accessories, we create pieces that fit your body, your personality, and your aesthetic perfectly.
-        </motion.p>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16"
-        >
-          <Link to="/consultation" className="w-full md:w-auto">
-            <Button variant="primary" className="px-10 py-5 w-full">Book a Custom Consultation</Button>
-          </Link>
-          <Button 
-            variant="secondary" 
-            className="px-10 py-5 w-full md:w-auto"
-            onClick={onNewOrder}
+      <div className="relative z-20 max-w-[1400px] mx-auto w-full px-12 grid grid-cols-12 gap-12 items-center">
+        <div className="col-span-12 lg:col-span-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
           >
-            Design My Outfit
-          </Button>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 md:gap-6"
-        >
-          {['Custom Measurements', 'Influencer Styling', 'Handcrafted Accessories', 'Premium Fabrics'].map((feature, i) => (
-            <span key={feature} className={`font-label text-[10px] md:text-xs tracking-widest uppercase border px-4 py-2 rounded-full bg-surface-container/50 ${i === 0 ? 'border-primary/30 text-primary' : i === 1 ? 'border-secondary/30 text-secondary' : i === 2 ? 'border-tertiary/30 text-tertiary' : 'border-outline-variant text-on-surface-variant'}`}>
-              {feature}
-            </span>
-          ))}
-        </motion.div>
+            <div className="mb-10 flex items-center gap-6">
+              <div className="h-px w-16 bg-primary" />
+              <span className="font-label text-xs uppercase tracking-[0.5em] text-primary font-bold">digital-first atelier / est. 24</span>
+            </div>
+            
+            <h1 className="font-headline font-bold text-7xl md:text-[11rem] tracking-[-0.08em] leading-[0.8] text-white mb-16">
+              THE <br />
+              <span className="font-serif italic font-normal text-primary lowercase tracking-tight">atelier.</span>
+            </h1>
+            
+            <p className="max-w-2xl text-on-surface-variant text-lg md:text-2xl mb-16 leading-relaxed font-body">
+              Synthesis of Parisian craftsmanship and computational design. Every stitch is a digital signature of excellence.
+            </p>
+            
+            <div className="flex flex-wrap gap-12 items-center">
+              <Button 
+                onClick={onNewOrder}
+                className="bg-primary text-white hover:bg-white hover:text-black transition-all duration-700 rounded-none px-16 py-8 text-sm font-bold uppercase tracking-widest shadow-2xl shadow-primary/20"
+              >
+                Commence Tailoring
+              </Button>
+              <Link to="/collections" className="group flex items-center gap-6 font-headline text-sm font-bold uppercase tracking-[0.3em] text-white">
+                View Archive
+                <div className="relative w-16 h-px bg-white/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-primary -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                </div>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+        
+        <div className="hidden lg:block lg:col-span-4 relative mt-24">
+           <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 2, ease: [0.19, 1, 0.22, 1], delay: 0.5 }}
+              className="relative aspect-[3/4] bg-surface-container overflow-hidden p-8 border border-white/5"
+           >
+              <img 
+                src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80" 
+                className="w-full h-full object-cover filter grayscale contrast-125 mb-8"
+                alt="Detail"
+              />
+              <div className="absolute bottom-8 left-8 right-8 text-black bg-white p-6">
+                 <span className="font-serif italic text-3xl">ss/24 edition</span>
+              </div>
+           </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-const FeatureCard = ({ title, icon, description, glow }: any) => (
+const FeatureCard = ({ title, icon, description, bgImage }: any) => (
   <motion.div 
-    whileHover={{ y: -5 }}
-    className={`p-8 bg-surface-container-high rounded-xl border border-outline-variant group transition-all duration-300 ${glow === 'primary' ? 'neon-border-primary' : glow === 'secondary' ? 'neon-border-secondary' : ''}`}
+    whileHover={{ y: -8 }}
+    className="group relative h-[450px] overflow-hidden bg-surface flex flex-col items-start justify-end p-10 border border-white/5"
   >
-    <div className="mb-4">{icon}</div>
-    <h3 className="font-headline font-bold text-xl mb-2 group-hover:text-on-surface transition-colors">{title}</h3>
-    <p className="text-on-surface-variant text-sm leading-relaxed">{description}</p>
+    <div className="absolute inset-0 z-0">
+      <img src={bgImage} className="w-full h-full object-cover filter grayscale sepia-[0.1] contrast-125 opacity-30 group-hover:opacity-60 transition-all duration-1000 scale-110 group-hover:scale-100" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+    </div>
+    
+    <div className="relative z-10 w-full mb-6">
+       <div className="w-12 h-12 flex items-center justify-center bg-white mb-8 group-hover:bg-primary transition-colors duration-500">
+          <div className="text-black group-hover:text-white transition-colors">{icon}</div>
+       </div>
+       <h3 className="font-headline font-bold text-3xl text-white mb-4 tracking-tighter transition-transform duration-500 group-hover:-translate-y-2">{title}</h3>
+       <p className="text-on-surface-variant text-sm font-body leading-relaxed max-w-[240px] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+         {description}
+       </p>
+    </div>
+    
+    <div className="absolute top-8 right-8">
+       <span className="font-label text-[11px] text-white/20 uppercase tracking-[0.4em]">.crafted</span>
+    </div>
   </motion.div>
 );
 
@@ -100,62 +122,92 @@ const Features = () => {
   };
 
   return (
-    <section className="py-24 px-8 max-w-7xl mx-auto border-t border-outline-variant/20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        <motion.div
-           initial={{ opacity: 0, x: -50 }}
-           whileInView={{ opacity: 1, x: 0 }}
-           viewport={{ once: true }}
-        >
-          <h2 className="font-headline font-bold text-4xl md:text-6xl mb-6 leading-tight">Create Your Outfit, <br/><span className="text-secondary">Your Way</span></h2>
-          <p className="text-on-surface-variant text-lg mb-12 leading-relaxed">
-            Every outfit is tailored with precision and designed exclusively for you. Share your preferences, measurements, inspiration, and styling needs — and we’ll handle the rest.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 className="font-label uppercase text-xs tracking-widest text-primary font-bold mb-6">Styles</h4>
-              <ul className="space-y-4">
-                {styles.map(s => (
-                  <li 
-                    key={s} 
-                    onClick={() => handleStyleClick(s)}
-                    className="flex items-center gap-3 text-on-surface group cursor-pointer hover:text-primary transition-colors"
-                  >
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full group-hover:scale-150 transition-transform"></span>
-                    <span className="font-label text-sm tracking-wide">{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-label uppercase text-xs tracking-widest text-secondary font-bold mb-6">Fabrics</h4>
-              <ul className="space-y-4">
-                {fabrics.map(f => (
-                  <li 
-                    key={f} 
-                    onClick={() => handleFabricClick(f)}
-                    className="flex items-center gap-3 text-on-surface group cursor-pointer hover:text-secondary transition-colors"
-                  >
-                    <span className="w-1.5 h-1.5 bg-secondary rounded-full group-hover:scale-150 transition-transform"></span>
-                    <span className="font-label text-sm tracking-wide">{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-          <div className="space-y-6">
-            <FeatureCard title="Precision Fit" icon={<span className="text-primary"><Ruler size={24}/></span>} description="Bespoke measurements for a flawless silhouette." glow="primary" />
-            <FeatureCard title="Accessories" icon={<span className="text-secondary"><ShoppingBag size={24}/></span>} description="Bags, belts, and jewelry handcrafted to match." />
-          </div>
-          <div className="space-y-6 md:mt-12">
-            <FeatureCard title="Original Art" icon={<span className="text-tertiary"><PenTool size={24}/></span>} description="Unique patterns and hand-embroidered details." />
-            <FeatureCard title="VIP Service" icon={<span className="text-secondary"><ShieldCheck size={24}/></span>} description="Dedicated styling support for every event." glow="secondary" />
-          </div>
+    <section className="py-48 px-12 max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-12 gap-12 items-start mb-32">
+        <div className="col-span-12 md:col-span-6">
+           <h2 className="font-headline font-bold text-6xl md:text-8xl tracking-tight text-white mb-8">CAPABILITIES</h2>
+           <p className="text-on-surface-variant text-xl italic font-serif leading-relaxed max-w-lg mb-12">
+             An architectural approach to garment construction. We define silhouettes through the lens of digital geometry and traditional handcraft.
+           </p>
+           <Link to="/consultation" className="inline-flex items-center gap-6 group">
+             <span className="font-headline font-bold uppercase tracking-widest text-sm underline decoration-primary decoration-2 underline-offset-8 group-hover:text-primary transition-colors">Learn More</span>
+           </Link>
         </div>
+        <div className="col-span-12 md:col-span-6 md:text-right">
+           <span className="font-label text-9xl text-white/[0.02] font-black uppercase leading-none select-none">Atelier</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <FeatureCard 
+          title="Bespoke Fit" 
+          icon={<Ruler size={24}/>} 
+          description="Parametric measurements for an uncompromising silhouette." 
+          bgImage="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&q=80"
+        />
+        <FeatureCard 
+          title="Artistry" 
+          icon={<PenTool size={24}/>} 
+          description="High-definition hand embroidery textures for modern women." 
+          bgImage="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80"
+        />
+        <FeatureCard 
+          title="Consultation" 
+          icon={<ShieldCheck size={24}/>} 
+          description="Private styling sessions in a virtual atelier atmosphere." 
+          bgImage="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80"
+        />
+        <FeatureCard 
+          title="Accessories" 
+          icon={<ShoppingBag size={24}/>} 
+          description="Sculptural handcrafted details to elevate every creation." 
+          bgImage="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80"
+        />
+      </div>
+
+      <div className="mt-48 grid grid-cols-12 gap-12 items-center">
+         <div className="col-span-12 lg:col-span-6">
+            <h2 className="font-headline font-bold text-5xl md:text-8xl tracking-[-0.08em] leading-[0.9] text-white transition-all duration-700">
+              DIGITAL <br />
+              <span className="font-serif italic text-secondary lowercase tracking-tight">synthesis.</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-20">
+               <div>
+                  <h4 className="font-label text-[11px] uppercase tracking-[0.5em] text-primary font-bold mb-10">Styles</h4>
+                  <div className="space-y-6">
+                    {styles.map(s => (
+                      <button key={s} onClick={() => handleStyleClick(s)} className="block font-headline text-lg text-on-surface-variant hover:text-white transition-all hover:translate-x-2">
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+               </div>
+               <div>
+                  <h4 className="font-label text-[11px] uppercase tracking-[0.5em] text-secondary font-bold mb-10">Materials</h4>
+                  <div className="space-y-6">
+                    {fabrics.map(f => (
+                      <button key={f} onClick={() => handleFabricClick(f)} className="block font-headline text-lg text-on-surface-variant hover:text-white transition-all hover:translate-x-2">
+                        {f}
+                      </button>
+                    ))}
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div className="col-span-12 lg:col-span-6">
+            <div className="relative aspect-[4/5] bg-white/[0.02] border border-white/10 overflow-hidden group">
+               <img 
+                 src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80" 
+                 className="w-full h-full object-cover grayscale opacity-20 transition-transform duration-1000 group-hover:scale-110"
+                 alt="Process"
+               />
+               <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center bg-background/40 backdrop-blur-sm">
+                  <h3 className="font-serif italic text-6xl text-white mb-6">the process</h3>
+                  <p className="font-label text-xs uppercase tracking-[0.4em] text-primary">measure . iterate . craft</p>
+                  <Button className="mt-12 bg-white text-black hover:bg-primary hover:text-white transition-all rounded-none px-10 py-4 uppercase font-bold tracking-widest text-[10px]">Learn Our Philosophy</Button>
+               </div>
+            </div>
+         </div>
       </div>
     </section>
   );
@@ -163,57 +215,36 @@ const Features = () => {
 
 const Journey = ({ status }: { status: any }) => {
   const steps = [
-    { num: '1', title: 'Share Your Vision', desc: 'References, Pinterest inspirations, or event details.', color: 'primary', completed: status.vision },
-    { num: '2', title: 'Measurements', desc: 'Guided sizing and digital styling session.', color: 'secondary', completed: status.measurements },
-    { num: '3', title: 'Design & Craft', desc: 'Handcrafted with premium tailoring and detailing.', color: 'primary', completed: status.craft },
-    { num: '4', title: 'Final Delivery', desc: 'Perfectly tailored outfit delivered to your door.', color: 'secondary', completed: status.delivery }
+    { num: '01', title: 'Share Vision', desc: 'Inspired by your mood boards and event aesthetics.', completed: status.vision },
+    { num: '02', title: 'Morphology', desc: 'Digital measurement session for precise geometry.', completed: status.measurements },
+    { num: '03', title: 'Synthesis', desc: 'Computational design meets traditional craftsmanship.', completed: status.craft },
+    { num: '04', title: 'Delivery', desc: 'Securely packaged and delivered to your doorstep.', completed: status.delivery }
   ];
 
   return (
-    <section className="py-24 bg-surface-container-lowest overflow-hidden">
-      <div className="max-w-7xl mx-auto px-8">
-        <SectionHeading subtitle="Your dream outfit, from concept to creation.">
-          The CC <span className="text-primary">Journey</span>
-        </SectionHeading>
+    <section className="py-48 bg-surface overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-12">
+        <div className="mb-32">
+           <h2 className="font-headline font-bold text-6xl md:text-8xl tracking-tight text-white mb-8">THE LOGIC</h2>
+           <p className="text-on-surface-variant text-xl italic font-serif opacity-60">Linear progression from concept to physical reality.</p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
-          <div className="hidden md:block absolute top-[30px] left-0 w-full h-[1px] bg-outline-variant z-0"></div>
-          {steps.map((step, i) => {
-            // "Resolve" only shows if the journey has started but this specific step is incomplete
-            const isMissing = status.started && !step.completed && i < 3; 
-            
-            return (
-              <motion.div 
-                key={step.num}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative z-10 flex flex-col items-center text-center group"
-              >
-                <div className={`w-16 h-16 rounded-full bg-surface-container-high border-2 flex items-center justify-center font-headline font-bold text-xl mb-6 transition-all duration-500 group-hover:scale-110 
-                  ${step.completed 
-                    ? 'border-secondary text-secondary shadow-[0_0_20px_rgba(0,255,204,0.3)]' 
-                    : isMissing 
-                      ? 'border-primary/50 text-primary animate-pulse' 
-                      : 'border-secondary text-secondary group-hover:shadow-[0_0_20px_rgba(0,255,204,0.3)]'}`}
-                >
-                  {step.completed ? <CheckCircle2 className="w-8 h-8" /> : isMissing ? <XCircle className="w-8 h-8 opacity-60" /> : step.num}
-                </div>
-                <h3 className={`font-headline font-bold text-lg mb-2 ${isMissing ? 'text-primary' : 'text-on-surface'}`}>{step.title}</h3>
-                <p className="text-on-surface-variant text-sm px-4 leading-relaxed">{step.desc}</p>
-                {isMissing && (
-                  <Link 
-                    to="/design" 
-                    state={{ step: i === 0 ? 4 : i + 1 }} // Step 1 -> index 4 (Vision), Step 2 -> index 2 (Meas), Step 3 -> index 3 (Craft)
-                    className="mt-4 font-label text-[10px] uppercase tracking-widest text-primary font-bold hover:underline"
-                  >
-                    Resolve Requirement
-                  </Link>
-                )}
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-24 relative">
+          {steps.map((step, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="relative flex flex-col items-start group"
+            >
+              <div className="font-label text-6xl text-white/5 font-black mb-8 transition-colors group-hover:text-primary/20">{step.num}</div>
+              <h3 className="font-headline font-bold text-2xl text-white mb-4 tracking-tighter group-hover:text-primary transition-colors">{step.title}</h3>
+              <p className="text-on-surface-variant text-base leading-relaxed font-body opacity-80">{step.desc}</p>
+              <div className="mt-8 w-12 h-px bg-white/10 group-hover:w-full group-hover:bg-primary transition-all duration-700" />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -222,31 +253,29 @@ const Journey = ({ status }: { status: any }) => {
 
 const Reviews = () => {
   const reviews = [
-    { name: 'Fashion Influencer', color: 'primary', text: '“I wanted something unique for my brand collaboration shoot, and they designed exactly what I imagined — maybe even better.”' },
-    { name: 'Content Creator', color: 'secondary', text: '“The fitting was absolutely perfect. I’ve never worn a custom outfit that felt this comfortable and luxurious.”', offset: true },
-    { name: 'Bride-to-be', color: 'primary', text: '“The attention to detail, fabric quality, and finishing were incredible. My wedding dress was a masterpiece.”' },
-    { name: 'Lifestyle Blogger', color: 'secondary', text: '“They don’t just stitch outfits — they understand your personality and create designs that truly represent you.”', offset: true }
+    { name: 'Chloe V.', text: '“The architectural integrity of the silhouette is unmatched. A digital miracle.”' },
+    { name: 'Sarah J.', text: '“I don’t just wear it; I exist in it. The measurements are mathematically perfect.”' },
+    { name: 'Elena R.', text: '“A seamless transition from my mood board to my wardrobe. Pure excellence.”' }
   ];
 
   return (
-    <section className="py-24 bg-surface-container-low">
-      <div className="max-w-7xl mx-auto px-8">
-        <SectionHeading>Loved By <span className="text-secondary neon-text-secondary">Influencers</span></SectionHeading>
+    <section className="py-48 bg-background px-12">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-32 flex flex-col md:flex-row justify-between items-end">
+           <h2 className="font-headline font-bold text-6xl md:text-8xl tracking-tight text-white uppercase">Voices</h2>
+           <span className="font-serif italic text-2xl text-primary lowercase">the collective consensus</span>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-24">
           {reviews.map((r, i) => (
             <motion.div 
               key={i}
               whileHover={{ y: -10 }}
-              className={`bg-surface p-8 rounded-2xl border border-outline-variant hover:border-${r.color} transition-all duration-500 flex flex-col justify-between ${r.offset ? 'lg:translate-y-8' : ''}`}
+              className="flex flex-col items-start gap-8"
             >
-              <div>
-                <div className="flex text-tertiary mb-6 gap-0.5">
-                  {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-tertiary" />)}
-                </div>
-                <p className="text-on-surface italic mb-8 leading-relaxed font-body text-sm opacity-90">{r.text}</p>
-              </div>
-              <div className={`font-label text-[10px] md:text-xs uppercase tracking-widest font-bold ${r.color === 'primary' ? 'text-primary' : 'text-secondary'}`}>
+              <div className="w-8 h-px bg-primary" />
+              <p className="text-white text-2xl font-serif italic leading-relaxed opacity-90">{r.text}</p>
+              <div className="font-label text-[11px] uppercase tracking-[0.4em] text-on-surface-variant mt-4">
                 — {r.name}
               </div>
             </motion.div>

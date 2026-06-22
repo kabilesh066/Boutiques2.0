@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;700&family=Instrument+Serif:ital,wght@0,400;1,400&family=Space+Mono&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-headline: "Outfit", sans-serif;
-  --font-body: "Sora", sans-serif;
-  --font-label: "Space Grotesk", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-label: "Space Mono", monospace;
+  --font-serif: "Instrument Serif", serif;
+  --font-mono: "Space Mono", monospace;
 
   --color-primary: #ff007b;
   --color-secondary: #00f2fe;
@@ -17,8 +18,8 @@
   --color-surface-container-high: #1e1e30;
   --color-surface-container-highest: #28283e;
   --color-surface-variant: #a098b0;
-  --color-on-surface: #e8e0f0;
-  --color-on-surface-variant: #a098b0;
+  --color-on-surface: #f8f0ff;
+  --color-on-surface-variant: #b0a8c0;
   --color-outline-variant: #302840;
 }
 
@@ -29,26 +30,26 @@
 }
 
 @layer utilities {
+  .glass-text {
+    @apply text-white/80;
+    backdrop-filter: blur(4px);
+  }
+  .glass-text-vibrant {
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04em;
+  }
   .neon-text-primary {
-    text-shadow: 0 0 8px #ff2d78;
+    @apply text-primary font-serif italic;
   }
   .neon-text-secondary {
-    text-shadow: 0 0 8px #00ffcc;
+    @apply text-secondary font-serif italic;
   }
   .neon-border-primary {
-    border: 1px solid rgba(255, 45, 120, 0.5);
-    box-shadow: inset 0 0 12px rgba(255, 45, 120, 0.1);
+    border: 1px solid rgba(255, 0, 123, 0.3);
   }
-  .neon-border-secondary {
-    border: 1px solid rgba(0, 255, 204, 0.3);
-    box-shadow: inset 0 0 12px rgba(0, 255, 204, 0.05);
-  }
-  .neon-glow-primary:hover {
-    box-shadow: 0 0 16px rgba(255, 45, 120, 0.4);
-  }
-  .scanline {
-    background: linear-gradient(to bottom, transparent 50%, rgba(255, 255, 255, 0.02) 50%);
-    background-size: 100% 4px;
-    position: relative;
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
   }
 }

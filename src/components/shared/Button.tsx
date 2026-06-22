@@ -1,13 +1,13 @@
 import { motion } from 'motion/react';
 
 export const Button = ({ children, variant = 'primary', className = '', ...props }: any) => {
-  const base = "px-6 py-3 font-label uppercase tracking-widest text-xs transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-center inline-block";
+  const base = "px-10 py-5 font-label uppercase tracking-[0.4em] text-[10px] transition-all duration-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-center inline-block border";
   const variants: any = {
-    primary: "bg-primary text-white neon-glow-primary rounded-lg font-bold",
-    secondary: "border border-secondary text-secondary hover:bg-secondary/10 rounded-lg font-bold",
-    outline: "border border-primary text-primary hover:bg-primary/10 rounded-lg",
-    ghost: "text-on-surface-variant hover:text-secondary",
-    link: "text-primary hover:underline p-0 h-auto"
+    primary: "bg-white text-black border-white hover:bg-black hover:text-white font-black",
+    secondary: "bg-primary text-white border-primary hover:bg-white hover:text-black font-black",
+    outline: "border-white/20 text-white hover:border-white hover:bg-white/5 font-bold",
+    ghost: "border-transparent text-white/40 hover:text-white font-bold",
+    link: "border-transparent text-primary hover:text-white p-0 h-auto underline underline-offset-8"
   };
 
   return (

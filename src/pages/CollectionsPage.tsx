@@ -73,36 +73,36 @@ export default function CollectionsPage() {
           <h1 className="font-headline font-black text-4xl lg:text-5xl tracking-tighter">My <span className="text-secondary neon-text-secondary">Collections</span></h1>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 w-full lg:w-auto">
+        <div className="grid grid-cols-3 gap-0 border border-white/10 w-full lg:w-auto overflow-hidden">
           {[
             { label: 'Total Designs', val: stats.total, icon: Package, color: 'primary' },
             { label: 'Blueprints', val: stats.completed, icon: Layers, color: 'secondary' },
             { label: 'Atelier Queue', val: stats.inProgress, icon: BarChart3, color: 'tertiary' }
           ].map(stat => (
-            <div key={stat.label} className="bg-surface-container-high p-4 rounded-3xl border border-outline-variant/30 flex flex-col items-center justify-center text-center">
-               <stat.icon size={20} className={`text-${stat.color} mb-2`} />
-               <div className="font-headline font-black text-2xl">{stat.val}</div>
-               <div className="font-label text-[8px] uppercase tracking-widest font-black opacity-40">{stat.label}</div>
+            <div key={stat.label} className="bg-surface p-10 border border-white/5 flex flex-col items-center justify-center text-center">
+               <stat.icon size={18} className={`text-${stat.color} mb-4`} />
+               <div className="font-headline font-black text-3xl tracking-tighter text-white">{stat.val}</div>
+               <div className="font-label text-[8px] uppercase tracking-[0.3em] font-black text-white/20 mt-2">{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Filters & Search */}
-      <div className="flex flex-col md:flex-row gap-6 mb-12">
+      <div className="flex flex-col md:flex-row gap-0 border border-white/10 mb-12">
         <div className="relative flex-1 group">
-          <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" size={20} />
+          <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-primary transition-colors" size={18} />
           <input 
             type="text" 
-            placeholder="Search by ensemble type or ID..."
+            placeholder="Search ensemble units or serial IDs..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-surface-container-highest border-2 border-outline-variant/30 hover:border-primary/30 focus:border-primary px-16 py-5 rounded-[2rem] font-label text-sm transition-all focus:outline-none"
+            className="w-full bg-surface-container-highest/20 border-r border-white/10 hover:bg-white/5 focus:bg-white/5 px-20 py-8 font-label text-[10px] uppercase tracking-[0.2em] font-bold transition-all focus:outline-none"
           />
         </div>
-        <Button variant="outline" className="flex items-center gap-2 px-8">
-           <Filter size={18} /> Filters
-        </Button>
+        <button className="flex items-center gap-4 px-12 py-8 bg-surface hover:bg-white/5 font-label text-[10px] uppercase tracking-[0.4em] font-black text-white/40 transition-colors">
+           <Filter size={16} /> Filters
+        </button>
       </div>
 
       {/* Collections Grid */}
@@ -111,64 +111,68 @@ export default function CollectionsPage() {
           {filteredCollections.length > 0 ? filteredCollections.map((order, i) => (
             <motion.div 
               key={order.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative bg-[#0a0a0b] rounded-[3rem] border border-outline-variant/30 overflow-hidden hover:border-primary/50 transition-all duration-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: i * 0.05 }}
+              className="group relative bg-surface border border-white/10 overflow-hidden hover:border-primary/50 transition-all duration-700"
             >
               {/* Card Header (Meta) */}
-              <div className="p-8 pb-4 flex justify-between items-start">
+              <div className="p-10 pb-6 flex justify-between items-start border-b border-white/5">
                 <div className="space-y-1">
-                  <div className="font-mono text-[9px] text-primary font-bold uppercase tracking-widest">#{order.id}</div>
-                  <div className="flex items-center gap-2 text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">
-                    <Calendar size={12} /> {new Date(order.timestamp).toLocaleDateString()}
+                  <div className="font-mono text-[9px] text-primary font-bold uppercase tracking-[0.4em]">SPEC_{order.id}</div>
+                  <div className="flex items-center gap-2 text-white/20 text-[9px] font-bold uppercase tracking-widest font-mono">
+                    <Calendar size={12} /> {new Date(order.timestamp).toLocaleDateString('en-GB').replace(/\//g, '.')}
                   </div>
                 </div>
-                <div className={`px-4 py-1 rounded-full font-label text-[8px] uppercase tracking-widest font-black ${order.submitted ? 'bg-secondary/10 text-secondary' : 'bg-tertiary/10 text-tertiary'}`}>
-                  {order.submitted ? 'Blueprint Ready' : 'In Progress'}
+                <div className={`text-[8px] uppercase tracking-[0.3em] font-black ${order.submitted ? 'text-primary' : 'text-white/20'}`}>
+                  {order.submitted ? 'Verified Blueprint' : 'Drafting Stage'}
                 </div>
               </div>
 
               {/* Visualization Style Mini Preview */}
-              <div className="px-8 py-2">
-                <div className="bg-surface-container-high rounded-2xl h-32 flex items-center justify-center overflow-hidden relative">
-                   <div className="font-headline font-black text-white/5 text-4xl absolute rotate-12">{order.state.outfitType}</div>
-                   <div className="relative z-10 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                      <ShoppingBag size={24} />
-                   </div>
-                </div>
+              <div className="px-10 py-12 flex items-center justify-center bg-white/[0.02]">
+                 <div className="relative group/mini">
+                    <div className="font-headline font-black text-white/5 text-6xl tracking-tighter uppercase select-none">{order.state.outfitType}</div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                       <div className="w-16 h-16 bg-white flex items-center justify-center text-black">
+                         <ShoppingBag size={24} />
+                       </div>
+                    </div>
+                 </div>
               </div>
 
               {/* Details Section */}
-              <div className="p-8 pt-4 space-y-4">
-                <div>
-                   <h3 className="font-headline font-black text-2xl group-hover:text-primary transition-colors">{order.state.outfitType}</h3>
-                   <p className="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold opacity-60">{order.state.fabric} • {order.state.style}</p>
+              <div className="p-10 space-y-8">
+                <div className="space-y-2">
+                   <h3 className="font-headline font-black text-2xl tracking-tighter uppercase text-white group-hover:text-primary transition-colors">{order.state.outfitType}</h3>
+                   <div className="h-0.5 w-12 bg-white/10 group-hover:bg-primary transition-colors" />
+                   <div className="flex gap-4">
+                     <p className="text-white/40 font-label text-[9px] uppercase tracking-[0.2em] font-bold group-hover:text-white transition-colors">{order.state.fabric}</p>
+                     <p className="text-white/20 font-label text-[9px] uppercase tracking-[0.2em] font-bold">///</p>
+                     <p className="text-white/40 font-label text-[9px] uppercase tracking-[0.2em] font-bold group-hover:text-white transition-colors">{order.state.style}</p>
+                   </div>
                 </div>
 
                 <div className="flex gap-2">
-                   <Button 
-                    variant="outline" 
-                    className="flex-1 py-3 h-auto"
+                   <button 
                     onClick={() => editOrder(order)}
+                    className="flex-1 py-4 bg-white/5 hover:bg-white text-white hover:text-black font-label text-[9px] uppercase tracking-[0.4em] font-black transition-all border border-white/5"
                    >
-                     <Edit3 size={14} className="mr-2" /> Edit
-                   </Button>
-                   <Button 
-                    variant="outline" 
-                    className="w-12 h-12 !p-0 border-red-500/20 text-red-500/60 hover:bg-red-500 hover:text-white transition-all rounded-2xl"
+                     RE-SPEC
+                   </button>
+                   <button 
                     onClick={() => deleteOrder(order.id)}
+                    className="px-6 py-4 bg-white/5 hover:bg-red-500 text-white/40 hover:text-white font-label text-[9px] uppercase tracking-[0.4em] font-black transition-all border border-white/5"
                    >
-                     <Trash2 size={16} />
-                   </Button>
-                   <Button 
-                    variant="primary" 
-                    className="w-12 h-12 !p-0 rounded-2xl"
+                     DEL
+                   </button>
+                   <button 
                     onClick={() => navigate('/blueprint', { state: { designState: order.state } })}
+                    className="px-6 py-4 bg-primary text-white font-label text-[9px] uppercase tracking-[0.4em] font-black transition-all"
                    >
-                     <ChevronRight size={20} />
-                   </Button>
+                     VIEW
+                   </button>
                 </div>
               </div>
             </motion.div>

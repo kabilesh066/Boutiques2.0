@@ -21,41 +21,36 @@ import { SectionHeading } from '../components/shared/SectionHeading';
 
 // --- Styled Components ---
 
-const SidebarOption = ({ label, active, onClick, icon: Icon }: any) => (
+const SidebarOption = ({ label, active, onClick, icon: Icon, index }: any) => (
   <button 
     onClick={onClick}
-    className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-500 group relative overflow-hidden ${active ? 'bg-primary/10 border border-primary/30 text-primary' : 'hover:bg-surface-container-highest border border-transparent text-on-surface-variant'}`}
+    className={`w-full flex flex-col items-start gap-4 p-6 transition-all duration-500 group relative border-b border-white/5 ${active ? 'bg-primary/5 text-primary' : 'hover:bg-white/[0.02] text-on-surface-variant'}`}
   >
-    {active && (
-      <motion.div 
-        layoutId="activeGlow"
-        className="absolute inset-0 bg-primary/5 blur-xl pointer-events-none"
-      />
-    )}
-    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 ${active ? 'bg-primary text-white shadow-[0_0_15px_rgba(255,45,120,0.4)]' : 'bg-surface-container-highest'}`}>
-      <Icon size={18} />
+    <div className={`text-[10px] font-label font-bold uppercase tracking-[0.4em] mb-2 ${active ? 'text-primary' : 'text-white/20'}`}>Step 0{index + 1}</div>
+    <div className="flex items-center gap-4">
+      <Icon size={18} className={active ? 'text-primary' : 'text-white/40'} />
+      <span className="font-headline text-[13px] uppercase tracking-[0.2em] font-bold text-left">{label}</span>
     </div>
-    <span className="font-label text-xs uppercase tracking-[0.2em] font-black text-left">{label}</span>
-    {active && <motion.div layoutId="activeTag" className="absolute right-0 top-0 bottom-0 w-1 bg-primary" />}
+    {active && <motion.div layoutId="activeTag" className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />}
   </button>
 );
 
 const RadioCard = ({ label, value, active, onClick, icon: Icon, trend }: any) => (
   <button
     onClick={() => onClick(value)}
-    className={`p-6 rounded-[2.5rem] border-2 transition-all duration-500 text-left flex flex-col gap-4 group relative overflow-hidden ${active ? 'bg-primary shadow-[0_0_40px_rgba(255,45,120,0.15)] border-primary' : 'bg-surface-container-highest border-outline-variant/30 hover:border-primary/40 hover:bg-surface-container-highest/80'}`}
+    className={`relative p-8 border transition-all duration-500 text-left flex flex-col gap-6 group overflow-hidden ${active ? 'bg-white text-black border-white' : 'bg-surface border-white/10 hover:border-primary/50'}`}
   >
     {trend && (
-      <div className="absolute top-4 right-4 bg-tertiary text-background font-label text-[8px] px-3 py-1 rounded-full font-black tracking-widest uppercase animate-pulse">
+      <div className="absolute top-4 right-4 bg-primary text-white font-label text-[8px] px-3 py-1 font-black tracking-widest uppercase">
         Trend
       </div>
     )}
-    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${active ? 'bg-white text-primary' : 'bg-surface-container-lowest text-on-surface-variant group-hover:text-primary group-hover:rotate-12'}`}>
-      {Icon ? <Icon size={20} /> : <div className="w-2 h-2 rounded-full bg-current" />}
+    <div className={`w-10 h-10 flex items-center justify-center transition-all duration-500 ${active ? 'bg-black text-white' : 'bg-white/5 text-on-surface-variant group-hover:text-primary'}`}>
+      {Icon ? <Icon size={18} /> : <div className="w-1.5 h-1.5 bg-current" />}
     </div>
     <div className="space-y-1">
-      <span className={`font-headline font-bold text-sm leading-tight block ${active ? 'text-white' : 'text-on-surface'}`}>{label}</span>
-      <span className={`font-label text-[8px] uppercase tracking-widest font-black block transition-opacity ${active ? 'text-white/60' : 'text-on-surface-variant/40'}`}>CC Concept</span>
+      <span className={`font-headline font-bold text-sm tracking-tight block ${active ? 'text-black' : 'text-white'}`}>{label}</span>
+      <span className={`font-label text-[8px] uppercase tracking-widest font-black block opacity-50 ${active ? 'text-black' : 'text-on-surface-variant'}`}>atelier .spec</span>
     </div>
   </button>
 );
@@ -112,7 +107,6 @@ const RealisticPreview = ({ outfitType, color, style, fabric }: any) => {
 
   const palette = colors[color] || { main: "#ff2d78", dark: "#c41c5a", accent: "#ff5c9d" };
 
-  // Helper for fabric texture filters
   const getFabricFilter = () => {
     if (fabric === 'Silk' || fabric === 'Satin') return 'url(#satinGlow)';
     if (fabric === 'Velvet') return 'url(#velvetDeep)';
@@ -120,18 +114,15 @@ const RealisticPreview = ({ outfitType, color, style, fabric }: any) => {
   };
 
   return (
-    <div className="relative w-full aspect-[3/4] bg-[#0a0a0b] rounded-[40px] overflow-hidden border border-outline-variant/30 flex items-center justify-center p-8 group">
-      {/* Dynamic Atelier Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+    <div className="relative w-full aspect-[3/4] bg-background flex items-center justify-center p-12 group border border-white/5">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 blur-[120px]" />
+        <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       </div>
 
       <motion.svg 
         viewBox="0 0 200 400" 
-        className="w-full h-full max-h-[90%] z-10"
+        className="w-full h-full max-h-[85%] z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         initial={false}
       >
         <defs>
@@ -140,205 +131,64 @@ const RealisticPreview = ({ outfitType, color, style, fabric }: any) => {
             <stop offset="50%" stopColor={palette.main} />
             <stop offset="100%" stopColor={palette.dark} />
           </linearGradient>
-
           <filter id="satinGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feSpecularLighting surfaceScale="5" specularConstant="0.8" specularExponent="20" lightingColor="#white" in="blur" result="spec">
+            <feGaussianBlur stdDeviation="1" result="blur" />
+            <feSpecularLighting surfaceScale="3" specularConstant="0.5" specularExponent="15" lightingColor="white" in="blur" result="spec">
               <fePointLight x="-50" y="-50" z="200" />
             </feSpecularLighting>
-            <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn" />
+            <feComposite in="spec" in2="SourceAlpha" operator="in" />
             <feComposite in="SourceGraphic" in2="specIn" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
-          </filter>
-
-          <filter id="velvetDeep">
-            <feComponentTransfer>
-              <feFuncR type="gamma" exponent="1.5" />
-              <feFuncG type="gamma" exponent="1.5" />
-              <feFuncB type="gamma" exponent="1.5" />
-            </feComponentTransfer>
           </filter>
         </defs>
 
-        {/* Human Silhouette (Faded Reference) */}
         <path 
           d="M100,50 C110,50 115,60 115,75 L115,85 C115,100 110,110 100,110 C90,110 85,100 85,85 L85,75 C85,60 90,50 100,50 Z M100,115 C120,115 140,130 140,160 L140,220 C140,250 130,280 120,320 L120,380 L80,380 L80,320 C70,280 60,250 60,220 L60,160 C60,130 80,115 100,115"
-          fill="#ffffff"
-          fillOpacity="0.05"
+          fill="white"
+          fillOpacity="0.02"
+          stroke="white"
+          strokeWidth="0.5"
+          strokeOpacity="0.1"
         />
 
         <AnimatePresence mode="wait">
-          {/* Main Outfit Overlay */}
           <motion.g
             key={outfitType}
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.05, y: -10 }}
-            transition={{ type: "spring", stiffness: 80, damping: 15 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
           >
-            {outfitType === 'Dhoti Saree' && (
-              <g filter={getFabricFilter()}>
-                 {/* Blouse */}
-                 <path d="M85,120 Q100,115 115,120 L125,145 L75,145 Z" fill={palette.dark} />
-                 {/* Dhoti Drape */}
-                 <motion.path 
-                    initial={{ scaleX: 0.5, opacity: 0 }}
-                    animate={{ scaleX: 1, opacity: 1 }}
-                    d="M75,145 Q85,250 100,380 L140,380 Q120,250 110,145 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-                 <motion.path 
-                    initial={{ scaleX: 0.5, opacity: 0 }}
-                    animate={{ scaleX: 1, opacity: 1 }}
-                    d="M125,145 Q115,250 100,380 L60,380 Q80,250 90,145 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-                 {/* Pallu */}
-                 <path d="M115,120 Q145,160 150,250 L120,250 Q115,160 110,120 Z" fill="white" fillOpacity="0.1" />
-              </g>
-            )}
-
-            {outfitType === 'Anarkali' && (
-              <g filter={getFabricFilter()}>
-                 <path d="M85,120 Q100,115 115,120 L125,160 L75,160 Z" fill={palette.dark} />
-                 <motion.path 
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    d="M75,160 Q100,150 125,160 L180,380 L20,380 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-              </g>
-            )}
-
-            {outfitType === 'Cape Set' && (
-              <g filter={getFabricFilter()}>
-                 <path d="M80,120 L120,120 L130,220 L70,220 Z" fill={palette.main} />
-                 <path d="M70,225 L130,225 L140,380 L60,380 Z" fill={palette.dark} />
-                 {/* Cape Shell */}
-                 <motion.path 
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 0.4, x: 0 }}
-                    d="M80,120 Q30,150 20,350 L180,350 Q170,150 120,120 L110,120 Q100,130 90,120 Z" 
-                    fill="white" 
-                 />
-              </g>
-            )}
-
-            {outfitType === 'Corset Lehenga' && (
-              <g filter={getFabricFilter()}>
-                 <path d="M85,120 Q100,110 115,120 L120,165 L80,165 Z" fill={palette.dark} stroke="white" strokeWidth="0.5" strokeOpacity="0.2" />
-                 <motion.path 
-                    initial={{ y: 20 }}
-                    animate={{ y: 0 }}
-                    d="M80,175 Q100,165 120,175 L175,380 L25,380 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-              </g>
-            )}
-
-            {outfitType === 'Saree' && (
-              <g filter={getFabricFilter()}>
-                 {/* Blouse */}
-                 <path d="M85,120 Q100,115 115,120 L125,155 L75,155 Z" fill={palette.dark} />
-                 {/* Saree Drape */}
-                 <motion.path 
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    d="M125,155 Q135,220 150,380 L60,380 Q75,250 85,155 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-                 {/* Pallu Layer */}
-                 <motion.path 
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    d="M75,125 Q40,160 30,280 L70,300 Q80,180 85,120 Z" 
-                    fill="url(#mainGrad)" 
-                    stroke="white" 
-                    strokeWidth="0.2" 
-                    strokeOpacity="0.3"
-                 />
-              </g>
-            )}
-
-            {outfitType === 'Lehenga' && (
-              <g filter={getFabricFilter()}>
-                 {/* Top */}
-                 <path d="M85,120 Q100,115 115,120 L120,150 L80,150 Z" fill={palette.dark} />
-                 {/* Skirt */}
-                 <motion.path 
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: 1 }}
-                    style={{ originY: "top" }}
-                    d="M75,165 Q100,155 125,165 L170,380 L30,380 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-                 <path d="M75,165 Q100,155 125,165 L120,175 Q100,165 80,175 Z" fill="white" fillOpacity="0.2" /> {/* Waistband */}
-              </g>
-            )}
-
-            {(outfitType === 'Western Outfit' || outfitType === 'Sharp Suit') && (
-              <g filter={getFabricFilter()}>
-                 {/* Blazer/Structure */}
-                 <motion.path 
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    d="M80,120 L120,120 L135,160 L130,230 L70,230 L65,160 Z" 
-                    fill="url(#mainGrad)" 
-                 />
-                 <path d="M100,120 L100,230" stroke="white" strokeWidth="0.5" strokeOpacity="0.3" /> {/* Lapel Center */}
-                 <path d="M85,235 L115,235 L125,380 L75,380 Z" fill={palette.dark} /> {/* Trousers */}
-              </g>
-            )}
-
-            {/* Default Silhouette for others */}
-            {!['Gown', 'Saree', 'Lehenga', 'Western Outfit', 'Sharp Suit'].includes(outfitType) && (
-              <motion.path 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                d="M70,120 Q100,110 130,120 L145,210 L155,380 L45,380 L55,210 Z"
-                fill="url(#mainGrad)"
-                filter={getFabricFilter()}
-              />
-            )}
+            <motion.path 
+              d="M70,120 Q100,110 130,120 L145,210 L155,380 L45,380 L55,210 Z"
+              fill="url(#mainGrad)"
+              filter={getFabricFilter()}
+              stroke="white"
+              strokeWidth="0.5"
+              strokeOpacity="0.2"
+            />
           </motion.g>
         </AnimatePresence>
-
-        {/* Shine/Glam Effect */}
-        {style === 'Luxury Glam' && (
-          <motion.g animate={{ opacity: [0, 0.8, 0] }} transition={{ repeat: Infinity, duration: 3 }}>
-            <circle cx="100" cy="180" r="1.5" fill="white" />
-            <circle cx="130" cy="250" r="1" fill="white" />
-            <circle cx="70" cy="300" r="1.2" fill="white" />
-          </motion.g>
-        )}
       </motion.svg>
 
-      {/* Decorative Atelier Overlays */}
-      <div className="absolute top-8 left-8 border-l border-primary/40 pl-4">
-        <h5 className="font-label text-[10px] uppercase tracking-[0.3em] text-primary font-black mb-1">CC Studio</h5>
-        <p className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant font-bold">Concept No. 842-A</p>
+      <div className="absolute top-12 left-12">
+        <h5 className="font-headline font-bold text-xs uppercase tracking-[0.4em] text-white">
+          Silhouettes
+        </h5>
+        <div className="h-0.5 w-12 bg-primary mt-2" />
       </div>
 
-      <div className="absolute top-8 right-8 text-right font-mono text-[9px] text-white/20 uppercase tracking-widest">
-        Precision Engineering <br />
-        Silhouettes V.2.4
-      </div>
-
-      <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
-        <div className="space-y-1">
-           <div className="flex gap-1">
-              {[1,2,3].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-primary" />)}
-           </div>
-           <div className="font-headline font-bold text-2xl text-white tracking-tight">
+      <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
+        <div className="space-y-2">
+           <div className="font-headline font-bold text-4xl text-white tracking-tighter">
              {outfitType}
            </div>
-           <div className="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/70 font-bold">
-             Reflects: {fabric} | {style}
+           <div className="font-serif italic text-lg text-primary lowercase tracking-tight">
+             {fabric} x {style}
            </div>
         </div>
-        <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center backdrop-blur-sm group-hover:border-primary/50 transition-colors">
-           <Activity size={20} className="text-primary/50 group-hover:text-primary transition-colors" />
+        <div className="font-mono text-[9px] text-white/20 uppercase text-right leading-relaxed">
+           Atelier .24 <br />
+           Verified / {color}
         </div>
       </div>
     </div>
@@ -512,6 +362,7 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                   label={step.title}
                   icon={step.icon}
                   active={activeStep === i}
+                  index={i}
                   onClick={() => setActiveStep(i)}
                 />
              ))}
@@ -583,34 +434,33 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                 {/* Step 2: Measurements */}
                 {activeStep === 2 && (
                   <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-outline-variant/30">
-                      <div className="space-y-1">
-                        <h3 className="font-headline font-bold text-2xl">Precision Scaling</h3>
-                        <p className="text-on-surface-variant text-sm tracking-wide">Select your region for local sizing standards.</p>
-                      </div>
-                      <RegionSelector 
-                        activeRegion={designState.region} 
-                        onSelect={(r: any) => setDesignState({...designState, region: r.id, units: r.units})} 
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                      {Object.keys(designState.measurements).map(key => (
-                        <MeasurementInput 
-                          key={key} 
-                          label={key.replace(/([A-Z])/g, ' $1')} 
-                          units={designState.units}
-                          value={(designState.measurements as any)[key]}
-                          onChange={(val: string) => setDesignState({
-                            ...designState, 
-                            measurements: { ...designState.measurements, [key]: val }
-                          })}
+                    <div className="space-y-8">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-white/10">
+                        <div className="space-y-1">
+                          <h3 className="font-headline font-black text-3xl uppercase tracking-tighter">Precision <span className="text-primary italic font-serif lowercase">Scaling</span></h3>
+                          <p className="text-white/40 font-label text-[10px] uppercase tracking-widest font-bold">Local Sizing Standards</p>
+                        </div>
+                        <RegionSelector 
+                          activeRegion={designState.region} 
+                          onSelect={(r: any) => setDesignState({...designState, region: r.id, units: r.units})} 
                         />
-                      ))}
-                    </div>
-                    <div className="p-6 bg-primary/5 border border-primary/20 rounded-2xl flex items-center gap-4 text-primary">
-                       <Ruler size={24} />
-                       <p className="text-sm font-medium">Need help with measurements? Book a session for guided assistance.</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {Object.keys(designState.measurements).map(key => (
+                          <div key={key} className="p-6 border border-white/10 bg-surface/30">
+                            <MeasurementInput 
+                              label={key.replace(/([A-Z])/g, ' $1')} 
+                              units={designState.units}
+                              value={(designState.measurements as any)[key]}
+                              onChange={(val: string) => setDesignState({
+                                ...designState, 
+                                measurements: { ...designState.measurements, [key]: val }
+                              })}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -651,28 +501,28 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                         <h4 className="font-headline font-black text-2xl uppercase tracking-tighter">Atelier <span className="text-secondary neon-text-secondary">Fabrics</span></h4>
                         <span className="font-mono text-[9px] text-on-surface-variant font-bold">TACTILE RESPONSE UNIT</span>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                         {[
-                           { name: 'Banarasi Silk', type: 'Rich' },
-                           { name: 'Organza Silk', type: 'Light' },
-                           { name: 'Russian Velvet', type: 'Heavy' },
-                           { name: 'French Satin', type: 'Glossy' },
-                           { name: 'Pure Georgette', type: 'Flowy' },
-                           { name: 'Net & Tulle', type: 'Sheer' },
-                           { name: 'Cotton Linen', type: 'Breathable' },
-                           { name: 'Premium Blend', type: 'Mixed' }
-                         ].map(f => (
-                           <button
-                             key={f.name}
-                             onClick={() => setDesignState({...designState, fabric: f.name})}
-                             className={`group p-6 rounded-[2rem] border-2 transition-all duration-500 text-left ${designState.fabric === f.name ? 'bg-secondary border-secondary shadow-[0_0_30px_rgba(0,255,204,0.2)]' : 'bg-surface-container-lowest border-outline-variant/30 hover:border-secondary/50'}`}
-                           >
-                              <div className={`w-8 h-8 rounded-full mb-4 border transition-transform group-hover:scale-110 ${designState.fabric === f.name ? 'bg-white/20 border-white/40' : 'bg-secondary/10 border-secondary/20'}`} />
-                              <div className={`font-label text-[10px] uppercase tracking-widest font-black ${designState.fabric === f.name ? 'text-white' : 'text-on-surface'}`}>{f.name}</div>
-                              <div className={`font-label text-[8px] uppercase tracking-widest mt-1 opacity-50 ${designState.fabric === f.name ? 'text-white' : 'text-on-surface-variant'}`}>{f.type}</div>
-                           </button>
-                         ))}
-                      </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
+                        {[
+                          { name: 'Banarasi Silk', type: 'Rich' },
+                          { name: 'Organza Silk', type: 'Light' },
+                          { name: 'Russian Velvet', type: 'Heavy' },
+                          { name: 'French Satin', type: 'Glossy' },
+                          { name: 'Pure Georgette', type: 'Flowy' },
+                          { name: 'Net & Tulle', type: 'Sheer' },
+                          { name: 'Cotton Linen', type: 'Breathable' },
+                          { name: 'Premium Blend', type: 'Mixed' }
+                        ].map(f => (
+                          <button
+                            key={f.name}
+                            onClick={() => setDesignState({...designState, fabric: f.name})}
+                            className={`group p-8 transition-all duration-500 text-left ${designState.fabric === f.name ? 'bg-white text-black' : 'bg-surface hover:bg-white/[0.02]'}`}
+                          >
+                             <div className={`w-8 h-8 mb-4 border transition-transform ${designState.fabric === f.name ? 'bg-black border-black/10' : 'bg-white/5 border-white/10'}`} />
+                             <div className={`font-headline text-[11px] uppercase tracking-[0.2em] font-bold ${designState.fabric === f.name ? 'text-black' : 'text-white'}`}>{f.name}</div>
+                             <div className={`font-label text-[8px] uppercase tracking-widest mt-1 opacity-50 ${designState.fabric === f.name ? 'text-black' : 'text-on-surface-variant'}`}>{f.type}</div>
+                          </button>
+                        ))}
+                     </div>
                     </div>
 
                     <div className="space-y-8">
@@ -705,8 +555,8 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                 {activeStep === 4 && (
                   <div className="space-y-10">
                     <div className="space-y-6">
-                       <h4 className="font-label text-xs uppercase tracking-widest text-tertiary font-bold">Matching Accessories</h4>
-                       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                       <h4 className="font-label text-[10px] uppercase tracking-[0.4em] text-white font-bold">Matching Accessories</h4>
+                       <div className="grid grid-cols-2 md:grid-cols-3 gap-0 border border-white/10">
                           {['Earrings', 'Neckpiece', 'Hair Accessories', 'Handbag', 'Waist Belt', 'Customized Add-ons'].map(acc => (
                             <button
                               key={acc}
@@ -716,9 +566,9 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                                   : [...designState.accessories, acc];
                                 setDesignState({...designState, accessories: newAccs as any});
                               }}
-                              className={`p-4 rounded-xl border flex items-center justify-between transition-all ${designState.accessories.includes(acc as never) ? 'bg-tertiary/10 border-tertiary text-tertiary' : 'bg-surface-container-lowest border-outline-variant text-on-surface-variant'}`}
+                              className={`p-6 border-px border-white/5 flex items-center justify-between transition-all ${designState.accessories.includes(acc as never) ? 'bg-white text-black' : 'bg-surface text-on-surface-variant hover:bg-white/[0.02]'}`}
                             >
-                               <span className="font-label text-[10px] uppercase tracking-widest font-bold">{acc}</span>
+                               <span className="font-headline text-[10px] uppercase tracking-[0.2em] font-bold">{acc}</span>
                                {designState.accessories.includes(acc as never) && <CheckCircle2 size={14} />}
                             </button>
                           ))}
@@ -726,15 +576,15 @@ export default function DesignPage({ onStatusUpdate, journeyStatus }: {
                     </div>
 
                     <div className="space-y-6">
-                       <h4 className="font-label text-xs uppercase tracking-widest text-primary font-bold">Fit Archetype</h4>
-                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                       <h4 className="font-label text-[10px] uppercase tracking-[0.4em] text-white font-bold">Fit Archetype</h4>
+                       <div className="grid grid-cols-2 md:grid-cols-5 gap-0 border border-white/10">
                           {['Slim Fit', 'Relaxed Fit', 'Body Contour Fit', 'Lightweight Comfort', 'Heavy Premium Look'].map(fit => (
                              <button
                                key={fit}
                                onClick={() => setDesignState({...designState, fit: fit})}
-                               className={`p-4 rounded-xl border text-center transition-all ${designState.fit === fit ? 'bg-primary text-white border-primary' : 'bg-surface-container-lowest border-outline-variant'}`}
+                               className={`p-6 transition-all border-px border-white/5 ${designState.fit === fit ? 'bg-primary text-white' : 'bg-surface hover:bg-white/[0.02]'}`}
                              >
-                                <span className="font-label text-[10px] uppercase tracking-widest font-bold">{fit}</span>
+                                <span className="font-headline text-[10px] uppercase tracking-[0.2em] font-bold">{fit}</span>
                              </button>
                           ))}
                        </div>

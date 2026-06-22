@@ -6,17 +6,17 @@ import { Button } from '../components/shared/Button';
 import { SectionHeading } from '../components/shared/SectionHeading';
 
 const Input = ({ label, icon: Icon, error, ...props }: any) => (
-  <div className="space-y-2">
-    <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold flex items-center gap-2">
-      {Icon && <Icon size={14} className="text-secondary" />}
+  <div className="space-y-3">
+    <label className="font-label text-[10px] uppercase tracking-[0.4em] text-white/40 font-bold flex items-center gap-2">
+      {Icon && <Icon size={12} className="text-primary" />}
       {label}
     </label>
     <div className="relative group">
       <input 
-        className={`w-full bg-surface-container-high/50 border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all p-4 text-on-surface outline-none rounded-xl group-hover:border-primary/50 ${error ? 'border-error' : ''}`} 
+        className={`w-full bg-surface-container-high/20 border border-white/5 focus:border-white focus:bg-white/5 transition-all p-5 text-on-surface outline-none ${error ? 'border-red-500' : ''}`} 
         {...props} 
       />
-      {error && <span className="text-error text-[10px] mt-1 block">{error}</span>}
+      {error && <span className="text-red-500 text-[10px] mt-1 block">{error}</span>}
     </div>
   </div>
 );
@@ -71,43 +71,39 @@ export default function ConsultationPage() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10">
         {/* Left Column: Info */}
         <div className="lg:col-span-5 flex flex-col justify-center">
-          <Link to="/" className="flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-12 font-label text-xs uppercase tracking-widest font-bold group">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Home
+          <Link to="/" className="flex items-center gap-4 text-primary hover:text-white transition-colors mb-16 font-label text-[10px] uppercase tracking-[0.5em] font-black group">
+            <ArrowLeft size={16} className="group-hover:-translate-x-2 transition-transform" />
+            Atelier Exit
           </Link>
 
-          <SectionHeading align="left" subtitle="A personalized session to define your aesthetic, measurements, and design vision.">
-            Book Your <br/> <span className="text-primary neon-text-primary">Consultation</span>
-          </SectionHeading>
+          <div className="space-y-8">
+            <div className="h-1 w-24 bg-primary" />
+            <h1 className="font-headline font-black text-6xl lg:text-7xl uppercase tracking-tighter text-white leading-none">
+              Secure Your <br/> <span className="text-white italic font-serif lowercase">Session</span>
+            </h1>
+            <p className="text-white/40 font-label text-[12px] uppercase tracking-[0.2em] font-bold max-w-sm leading-relaxed">
+              Define your aesthetic, metrics, and design vision with our chief architects.
+            </p>
+          </div>
 
-          <div className="space-y-8 mt-4">
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
-                <Calendar className="text-primary" />
+          <div className="space-y-12 mt-16 max-w-md">
+            <div className="flex gap-8 items-start group">
+              <div className="w-16 h-16 border border-white/10 bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                <Calendar className="text-white" size={24} />
               </div>
-              <div>
-                <h4 className="font-headline font-bold text-lg mb-1">Flexible Scheduling</h4>
-                <p className="text-on-surface-variant text-sm">Choose a time that works for you. We offer sessions in our Neo-Tokyo studio or via secure video link.</p>
+              <div className="space-y-2">
+                <h4 className="font-headline font-bold text-xl uppercase text-white">Scheduling unit</h4>
+                <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-wider">Choose a standard UTC slot. Available via Neo-Tokyo HQ or secure uplink.</p>
               </div>
             </div>
 
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
-                <Sparkles className="text-secondary" />
+            <div className="flex gap-8 items-start group">
+              <div className="w-16 h-16 border border-white/10 bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                <Sparkles className="text-white" size={24} />
               </div>
-              <div>
-                <h4 className="font-headline font-bold text-lg mb-1">Tailored Experience</h4>
-                <p className="text-on-surface-variant text-sm">Every woman is unique. We spend the first 30 minutes understanding your lifestyle and body type.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-6 items-start">
-              <div className="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
-                <ShieldCheck className="text-tertiary" />
-              </div>
-              <div>
-                <h4 className="font-headline font-bold text-lg mb-1">Zero Obligation</h4>
-                <p className="text-on-surface-variant text-sm">The consultation fee is fully redeemable against your first custom outfit order.</p>
+              <div className="space-y-2">
+                <h4 className="font-headline font-bold text-xl uppercase text-white">Couture Logic</h4>
+                <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-wider">A 30-minute analytical session addressing lifestyle, anatomy, and vision.</p>
               </div>
             </div>
           </div>
@@ -115,24 +111,24 @@ export default function ConsultationPage() {
 
         {/* Right Column: Form */}
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           className="lg:col-span-7"
         >
-          <div className="bg-surface-container p-8 md:p-12 rounded-3xl border border-outline-variant/30 shadow-2xl">
-            <form className="space-y-8" onSubmit={handleSubmit}>
+          <div className="bg-surface p-12 md:p-16 border border-white/10">
+            <form className="space-y-12" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Input 
-                  label="Full Name" 
-                  placeholder="Evelyn Thorne" 
+                  label="Full Name Spec" 
+                  placeholder="EX: EVELYN THORNE" 
                   icon={User} 
                   required 
                   value={formData.name}
                   onChange={(e: any) => setFormData({...formData, name: e.target.value})}
                 />
                 <Input 
-                  label="Email Address" 
-                  placeholder="hello@example.com" 
+                  label="Digital Mail Unit" 
+                  placeholder="name@unit.com" 
                   type="email" 
                   icon={Mail} 
                   required
@@ -143,7 +139,7 @@ export default function ConsultationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <Input 
-                  label="Phone Number" 
+                  label="Terminal Line" 
                   placeholder="+91 000 000 0000" 
                   type="tel" 
                   icon={Phone} 
@@ -152,7 +148,7 @@ export default function ConsultationPage() {
                   onChange={(e: any) => setFormData({...formData, phone: e.target.value})}
                 />
                 <Input 
-                  label="Preferred Date" 
+                  label="Deployment Date" 
                   type="date" 
                   icon={Calendar} 
                   required
@@ -161,15 +157,15 @@ export default function ConsultationPage() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">Occasion Category</label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="space-y-4">
+                <label className="font-label text-[10px] uppercase tracking-[0.4em] text-white/40 font-bold">Category Spec</label>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-white/10">
                   {['Wedding', 'Social', 'Editorial', 'Corporate'].map(type => (
                     <button
                       key={type}
                       type="button"
                       onClick={() => setFormData({...formData, occasion: type})}
-                      className={`py-3 rounded-xl font-label text-[10px] uppercase tracking-widest border transition-all duration-300 ${formData.occasion === type ? 'bg-primary border-primary text-white shadow-[0_0_15px_rgba(255,45,120,0.4)]' : 'border-outline-variant text-on-surface-variant hover:border-primary/50'}`}
+                      className={`py-4 font-label text-[10px] uppercase tracking-[0.2em] transition-all duration-500 border border-white/5 ${formData.occasion === type ? 'bg-white text-black font-black' : 'text-white/40 hover:bg-white/5'}`}
                     >
                       {type}
                     </button>
@@ -177,25 +173,25 @@ export default function ConsultationPage() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold flex items-center gap-2">
-                  <MessageSquare size={14} className="text-secondary" />
-                  Design Inspiration & Preferences
+              <div className="space-y-4">
+                <label className="font-label text-[10px] uppercase tracking-[0.4em] text-white/40 font-bold flex items-center gap-2">
+                  <MessageSquare size={12} className="text-primary" />
+                  Inspiration Directive
                 </label>
                 <textarea 
-                  className="w-full bg-surface-container-high/50 border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all p-4 text-on-surface h-32 outline-none resize-none rounded-xl group-hover:border-primary/50" 
-                  placeholder="Tell us about the colors, fabrics, and silhouettes you love..."
+                  className="w-full bg-surface-container-high/10 border border-white/5 focus:border-white transition-all p-6 text-on-surface h-40 outline-none resize-none" 
+                  placeholder="Detail your silhouettes, fabrics, and chromatic preferences..."
                   value={formData.details}
                   onChange={(e: any) => setFormData({...formData, details: e.target.value})}
                 ></textarea>
               </div>
 
-              <Button type="submit" className="w-full py-5 text-sm" variant="primary">
-                Confirm Consultation Request
+              <Button type="submit" className="w-full py-8 text-[11px] uppercase tracking-[0.4em] font-black" variant="primary">
+                Confirm Deployment Order
               </Button>
               
-              <p className="text-center text-on-surface-variant text-[10px] uppercase tracking-[0.2em] opacity-50">
-                Secured by CC Identity Systems
+              <p className="text-center text-white/10 text-[9px] uppercase tracking-[0.4em] font-mono">
+                System Verified / CC_SEC_UNIT
               </p>
             </form>
           </div>
